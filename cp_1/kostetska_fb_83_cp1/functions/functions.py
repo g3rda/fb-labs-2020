@@ -1,4 +1,5 @@
 import math
+from collections import Counter
 
 
 def count_unigrams(text1):
@@ -8,8 +9,10 @@ def count_unigrams(text1):
 
 def count_bigrams(text2, intersection):
     bigrams_number = len(text2) - 1 if intersection else len(text2) // 2
-    bigrams = [(i+j) for (i, j) in zip(text2[0::1 if intersection else 2], text2[1::1 if intersection else 2])]
-    frequencies2 = {i: bigrams.count(i) / bigrams_number for i in sorted(set(bigrams))}
+    bigrams = [(i + j) for (i, j) in zip(text2[0::1 if intersection else 2], text2[1::1 if intersection else 2])]
+    coun = Counter(bigrams)
+    frequencies2 = {i: coun[i] / bigrams_number for i in coun}
+    # frequencies2 = {i: bigrams.count(i) / bigrams_number for i in sorted(set(bigrams))} # very slow
     return frequencies2
 
 
@@ -32,10 +35,10 @@ def print_bigrams_table(fr, file):
         table[letters.index(i[0])][letters.index(i[1])] = fr[i]
     file.write('   ')
     for i in letters:
-        file.write('  '+i+'   ')
+        file.write('   ' + i + '   ')
     file.write('\n')
     for i in table:
-        file.write(letters[table.index(i)]+'  ')
+        file.write(letters[table.index(i)] + '  ')
         for j in i:
-            file.write("{:.4f}".format(j*100)+' ')
+            file.write("{:.4f}".format(j * 100) + ' ')
         file.write('\n')
