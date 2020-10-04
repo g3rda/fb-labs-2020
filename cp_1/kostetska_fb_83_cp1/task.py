@@ -8,10 +8,8 @@ def count_unigrams(text1):
 
 def count_bigrams(text2, intersection):
     bigrams_number = len(text2) - 1 if intersection else len(text2) // 2
-    bigrams = sorted(set([(i+j) for (i, j) in zip(text2[0::1 if intersection else 2], text2[1::1 if intersection else 2])]))
-    frequencies2 = {i: text2.count(i) / bigrams_number for i in bigrams}
-    # for i in frequencies2:
-    #     print(i+": "+"{:.3f}".format(frequencies2[i]*100))
+    bigrams = [(i+j) for (i, j) in zip(text2[0::1 if intersection else 2], text2[1::1 if intersection else 2])]
+    frequencies2 = {i: bigrams.count(i) / bigrams_number for i in sorted(set(bigrams))}
     return frequencies2
 
 
