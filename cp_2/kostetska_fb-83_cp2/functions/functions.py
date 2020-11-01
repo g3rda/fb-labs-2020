@@ -1,4 +1,5 @@
 import collections
+import matplotlib.pyplot as plt
 
 alphabet = [chr(i) for i in range(ord('а'),ord('я')+1)]
 max_key_length= 30
@@ -25,23 +26,6 @@ def decrypt_vigenere(ct, key):
             pt+=ct[i]
     return pt
 
-def encrypt_caesar(pt, key):
-    ct=''
-    for i in pt:
-        if i in alphabet:
-            ct+=alphabet[(alphabet.index(i)+alphabet.index(key))%len(alphabet)]
-        else:
-            ct+=i
-    return ct
-
-def decrypt_caesar(ct, key):
-    pt=''
-    for i in ct:
-        if i in alphabet:
-            pt+=alphabet[(alphabet.index(i)-alphabet.index(key)+len(alphabet))%len(alphabet)]
-        else:
-            pt+=i
-    return pt
 
 def index_of_coincidence(text):
     sum =0
@@ -80,3 +64,13 @@ def generate_key(ct, key_len, chan):
         fr=find_most_frequent([ct[k] for k in range(i, len(ct), key_len)])
         key+=alphabet[(alphabet.index(fr)-alphabet.index(most_frequent[chan[i]%len(most_frequent)])+len(alphabet))%len(alphabet)]
     return key
+
+def paint_bar(indexes):
+    x=range(len(indexes))
+    y=indexes
+
+    plt.bar([xel+2 for xel in x],y,align='center')
+    plt.title('indexes of coincidence bar chart')
+    plt.xlabel('r')
+    plt.ylabel('indexes')
+    plt.show()
