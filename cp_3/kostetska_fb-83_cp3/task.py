@@ -18,13 +18,14 @@ def euclid(a, b):
 
 def extended_euclid(a, b):
     if b==0:
-        return [0, 1, abs(a)]
-    u1, v1, gcd = extended_euclid(b, a%b)
-    return [v1-a//b*u1, u1, gcd]
+        return [1, 0, abs(a)]
+    u, v, gcd = extended_euclid(b, a%b)
+    return [v, u-a//b*v, gcd]
+
 
 
 def inverse_element(a, n):
-    v,u,gcd=extended_euclid(a,n)
+    u,v,gcd=extended_euclid(a,n)
     if gcd==1:
         return u
 
@@ -60,7 +61,8 @@ x=count_bigrams(line, False)
 x={k: v for k, v in sorted(x.items(), key=lambda item: item[1])[::-1]}
 first_elements = [i[0] for i in list(x.items())[:5]]
 five_most_often = ["ст", "но", "то", "на", "ен"]
-print(upper_letter("б", "а"))
+#print(upper_letter("б", "а"))
 a = solve_linear(upper_letter(five_most_often[0][0], five_most_often[0][1])-upper_letter(five_most_often[1][0], five_most_often[1][1]), upper_letter(first_elements[0][0], first_elements[0][1])-upper_letter(first_elements[1][0], first_elements[1][1]), pow(len(alphabet), 2))
 b = (upper_letter(first_elements[0][0], first_elements[0][1])-a[0]*upper_letter(five_most_often[0][0], five_most_often[0][1]))%pow(len(alphabet), 2)
-decipher_afin_bigrams(a[0], b, line)
+#decipher_afin_bigrams(a[0], b, line)
+print(extended_euclid(133432,803429054))
