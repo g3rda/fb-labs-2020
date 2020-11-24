@@ -1,5 +1,4 @@
 from collections import Counter
-import itertools
 import math
 
 #define Russian alphabet and five most often bigrams in language

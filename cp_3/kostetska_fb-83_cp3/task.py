@@ -1,4 +1,5 @@
 from functions.functions import *
+import itertools
 
 # read ciphertext from file
 f=open('text/12.txt', 'r')
@@ -15,7 +16,7 @@ flag = 0
 # go thought every possible combination of
 # (2 bigrams from most often in language, 2 bigrams from most often in ciphertext)
 for i in itertools.permutations(five_most_often, 2):
-    for j in itertools.permutations(first_elements, 2):
+    for j in itertools.combinations(first_elements, 2):
         print('-> X: '+str(i)+'; Y: '+str(j)+';')
 
         # get coefficients for decryption, check if not None
